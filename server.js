@@ -1,21 +1,16 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+var express = require('express');
+var app = express();
+var fs = require("fs");
 
-// create express app
-const app = express();
+app.get('/listUsers', function (req, res) {
+   fs.readFile( __dirname + "/" + "/data/users.json", 'utf8', function (err, data) {
+      console.log( data );
+      res.end( data );
+   });
+})
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
-
-// parse requests of content-type - application/json
-app.use(bodyParser.json())
-
-// define a simple route
-app.get('/', (req, res) => {
-    res.json({"message": "> Welcome to my optizmo coding test. Please enter in seconds how often you would like to receive output alerts"});
-});
-
-// listen for requests
-app.listen(3000, () => {
-    console.log("Server is listening on port 3000");
-});
+var server = app.listen(8081, function () {
+   var host = server.address().address
+   var port = server.address().port
+   console.log("Example app listening at http://%s:%s", host, port)
+})
