@@ -8,18 +8,24 @@ function getAllUsers() {
     return users;
 }
 
-function hasMatch(email) {
-    console.log('search email: ' + email)
+function hasMatchEmail(input) {
     const users = getAllUsers();
-    const results = users.filter (user => user.email == email);
-
-    if (results && results.length > 0) {
-        console.log ('Match Found: ' + JSON.stringify(results));
-        return true;
-    } else {
-        console.log ('No match for: ' + email);
-        return false;
-    }
+    const results = users.filter(user => user.email == input);
+    return results && results.length > 0;
 }
 
-hasMatch('adamk@hotmails.com');
+function hasMatchEmails(input) {
+    const emails = input.split(',');
+    const results = [];
+
+    if (emails && emails.length > 0) {
+        for (const email of emails) {
+            const result = { 'email': email, 'hasMatch': hasMatchEmail(email) };
+            results.push(result);
+        }
+    }
+    return results;
+}
+
+const results = hasMatchEmails('adamk@hotmails.com,test@hotmail.com,rsteiner@live.com');
+console.log(JSON.stringify(results));
