@@ -1,7 +1,7 @@
 # email-service
 
     gpg --list-keys
-    git config --global user.signingkey <signing_key>
+    git config --global user.signingkey 15A7F79AA2A04A1311870F23BB33825AC9F8B069
 
     node server.js
 
@@ -10,6 +10,8 @@
     yarn add react
     
     http://localhost:8081/listUsers
+    curl -d '{"emails":"adamk@gmail.com,test@hotmail.com,anthony@hotmails.com,rsteiner@live.com,chaffar@aol.com"}' -H "Content-Type: application/json" -X POST http://localhost:8081/findUsers
+
     http://localhost:3000
 
 
@@ -26,6 +28,7 @@
     https://www.w3schools.com/react/react_components.asp
     https://www.digitalocean.com/community/tutorials/how-to-call-web-apis-with-the-useeffect-hook-in-react
     https://www.pluralsight.com/guides/fetch-data-from-a-json-file-in-a-react-app
+    https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
 
     CORS
     https://www.pluralsight.com/guides/allow-access-control-origin-in-create-react-app

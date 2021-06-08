@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { getUser } from './service/email-service';
+import { findUsers } from './service/email-service';
 
 function App() {
   const [list, setList] = useState([]);
@@ -18,7 +18,7 @@ function App() {
   // }, [])
 
   useEffect(()=>{
-    getUser()
+    findUsers('adamk@gmail.com,test@hotmail.com,anthony@hotmails.com,rsteiner@live.com,chaffar@aol.com')
     .then(items => {
         setList(items)
     })

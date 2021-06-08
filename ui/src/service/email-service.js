@@ -1,17 +1,16 @@
-export function getUser(value) {
+export function findUsers(input) {
 
-    return fetch('/listUsers'
-        , {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        }
-    )
-    .then(function(response){
-        console.log(response)
-        return response.json();
-      });
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ emails: input })
+    };
+
+    return fetch('/findUsers', requestOptions)
+        .then(function (response) {
+            console.log(response)
+            return response.json();
+        });
 }
 
 // export default EmailService;
