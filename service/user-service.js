@@ -1,44 +1,44 @@
 'use strict';
 
-// const e = require('express');
 const fs = require('fs');
 
-function getAllUsers() {
-    const rawdata = fs.readFileSync('../data/users.json');
-    const users = JSON.parse(rawdata);
-    return users;
-}
+module.exports = {
 
-function hasMatchEmail(input) {
-    const users = getAllUsers();
-    const results = users.filter(user => user.email == input);
-    return results && results.length > 0;
-}
+    getAllUsers: function () {
+        const rawdata = fs.readFileSync('../data/users.json');
+        const users = JSON.parse(rawdata);
+        return users;
+    },
 
-function hasMatchEmails(input) {
-    const emails = input.split(',');
-    let results = [];
-    const matchedEmails = [];
-    const nonMatchedEmails = [];
+    hasMatchEmail: function (input) {
+        const users = this.getAllUsers();
+        const results = users.filter(user => user.email == input);
+        return results && results.length > 0;
+    },
 
-    if (emails && emails.length > 0) {
-        for (const email of emails) {
+    hasMatchEmails: function (input) {
+        const emails = input.split(',');
+        let results = [];
+        const matchedEmails = [];
+        const nonMatchedEmails = [];
 
-            if (hasMatchEmail(email)) {
-                matchedEmails.push({ 'email': email, 'hasMatch': true });
-            } else {
-                nonMatchedEmails.push({ 'email': email, 'hasMatch': false });
+        if (emails && emails.length > 0) {
+            for (const email of emails) {
+
+                if (this.hasMatchEmail(email)) {
+                    matchedEmails.push({ 'email': email, 'hasMatch': true });
+                } else {
+                    nonMatchedEmails.push({ 'email': email, 'hasMatch': false });
+                }
             }
+
+            // combine the search results
+            matchedEmails.sort((a, b) => a.email.localeCompare(b.email));
+            nonMatchedEmails.sort((a, b) => a.email.localeCompare(b.email));
+            results = [...matchedEmails, ...nonMatchedEmails];
         }
 
-        // combine the search results
-        matchedEmails.sort((a, b) => a.email.localeCompare(b.email));
-        nonMatchedEmails.sort((a, b) => a.email.localeCompare(b.email));
-        results = [...matchedEmails, ...nonMatchedEmails];
+        return results;
     }
-
-    return results;
 }
 
-const results = hasMatchEmails('adamk@gmail.com,test@hotmail.com,anthony@hotmails.com,rsteiner@live.com,chaffar@aol.com');
-console.log(JSON.stringify(results));
