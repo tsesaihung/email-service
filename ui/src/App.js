@@ -22,6 +22,10 @@ export default class App extends Component {
       })
   };
 
+  onClear = () => {
+    this.setState({ searchResults: "" });
+  };
+
   render() {
     return (
       <>
@@ -47,6 +51,11 @@ export default class App extends Component {
               variant="outline-success"
               onClick={this.onSubmit}
             >Start</Button>
+            <Button
+              className="btnFormSend"
+              variant="outline-success"
+              onClick={this.onClear}
+            >Stop</Button>
           </Form.Group>
         </div>
       </>
