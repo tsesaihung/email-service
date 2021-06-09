@@ -30,6 +30,10 @@
     https://www.pluralsight.com/guides/fetch-data-from-a-json-file-in-a-react-app
     https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
 
+    UI 
+    https://github.com/react-bootstrap/code-sandbox-examples/blob/master/README.md
+    https://blog.logrocket.com/how-to-use-bootstrap-with-react-a354715d1121/
+
     CORS
     https://www.pluralsight.com/guides/allow-access-control-origin-in-create-react-app
     https://javascript.info/fetch-crossorigin
