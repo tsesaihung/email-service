@@ -3,6 +3,7 @@ import './App.css';
 import React, { useEffect, useState, Component } from 'react';
 import { findUsers } from './service/email-service';
 import { Form, Button } from "react-bootstrap";
+import Terminal from 'terminal-in-react';
 export default class App extends Component {
 
   // const [list, setList] = useState([]);
@@ -11,25 +12,51 @@ export default class App extends Component {
   state = {
     searchEmail: "",
     searchEmails: [],
-    searchResults: ""
+    searchResults: "",
+    searchFrequency: 10,
+    textAreaOutput: ""
   };
+
+  constructor() {
+    super();
+    console.log('tesing');
+
+    // while (true) {
+    //   console.log('enter new email');
+    // }
+  }
+
+  onStart = () => {
+
+    console.log ('on start');
+
+    setTimeout(() => {
+      // this.appendText('enter email');
+      console.log('enter email');
+    }, 3000);
+  }
+
 
   onSubmit = () => {
     const searchEmails = this.state.searchEmails;
     searchEmails.push(this.state.searchEmail);
-    console.log ('searchEmails: ' + searchEmails);
+    console.log('searchEmails: ' + searchEmails);
 
-    this.setState({ searchEmails:  searchEmails});
+    this.setState({ searchEmails: searchEmails });
 
     findUsers(this.state.searchEmails.join(','))
       .then(items => {
         // this.state.searchResults = items;
-        this.setState({ searchResults: this.parseSearchResults(items) });
+        this.appendText('>>' + this.parseSearchResults(items));
       })
   };
 
+  appendText(input) {
+    this.setState({ textAreaOutput: `${this.state.textAreaOutput}\n${input}` });
+  }
+
   onClear = () => {
-    this.setState({ searchResults: "" });
+    this.setState({ textAreaOutput: "" });
   };
 
   parseSearchResults(searchResults) {
@@ -46,26 +73,36 @@ export default class App extends Component {
     return (
       <>
         <div>
+          <Form.Group controlId="formOutputFrequency">
+            <Form.Label>Welcome to my optizmo coding test.</Form.Label>
+            <Form.Label>Please enter in seconds how often you would like to receive output alerts </Form.Label>
+            <Form.Control type="text" placeholder="10" onChange={e => this.setState({ searchFrequency: e.target.value })} value={this.state.searchFrequency} />
+          </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Please enter an email address to get started: </Form.Label>
-            <Form.Control type="email" placeholder="enter search emails" onChange={e => this.setState({ searchEmail: e.target.value })} value={this.state.searchEmail} />
-            <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
-          </Form.Group>
-          <Form.Group className="m-0">
-            <Form.Label>Search History: </Form.Label>
-            <Form.Control
-              className="textFeedback"
-              as="textarea"
-              rows="3"
-              placeholder="feedback"
-              value={JSON.stringify(this.state.searchResults)}
-              onChange={e => this.setState({ val: e.target.value })}
-              type="text"
-            />
+            <Form.Control type="email" onChange={e => this.setState({ searchEmail: e.target.value })} value={this.state.searchEmail} />
+            <Form.Text className="text-muted"></Form.Text>
             <Button
               className="btnFormSend"
               variant="outline-success"
               onClick={this.onSubmit}
+            >Submit</Button>
+          </Form.Group>
+          <Form.Group className="m-0">
+            <Form.Label>Output: </Form.Label>
+            <Form.Control
+              className="textFeedback"
+              as="textarea"
+              rows="10"
+              value={this.state.textAreaOutput}
+              onChange={e => this.setState({ val: e.target.value })}
+              type="text"
+            />
+            
+            <Button
+              className="btnFormSend"
+              variant="outline-success"
+              onClick={this.onStart}
             >Start</Button>
             <Button
               className="btnFormSend"
@@ -74,6 +111,32 @@ export default class App extends Component {
             >Stop</Button>
           </Form.Group>
         </div>
+        {/* <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh"
+          }}
+        >
+          <Terminal
+            color='green'
+            backgroundColor='black'
+            barColor='black'
+            style={{ fontWeight: "bold", fontSize: "1em" }}
+            commands={{
+              'open-google': () => window.open('https://www.google.com/', '_blank'),
+              showmsg: this.showMsg,
+              popup: () => alert('Terminal in React')
+            }}
+            descriptions={{
+              'open-google': 'opens google.com',
+              showmsg: 'shows a message',
+              alert: 'alert', popup: 'alert'
+            }}
+            msg='You can write anything here. Example - Hello! My name is Foo and I like Bar.'
+          />
+        </div> */}
       </>
     );
   }
