@@ -28,7 +28,7 @@ export default class App extends Component {
 
   onStart = () => {
 
-    console.log ('on start');
+    console.log('on start');
 
     setTimeout(() => {
       // this.appendText('enter email');
@@ -72,44 +72,55 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <div>
-          <Form.Group controlId="formOutputFrequency">
-            <Form.Label>Welcome to my optizmo coding test.</Form.Label>
-            <Form.Label>Please enter in seconds how often you would like to receive output alerts </Form.Label>
-            <Form.Control type="text" placeholder="10" onChange={e => this.setState({ searchFrequency: e.target.value })} value={this.state.searchFrequency} />
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Please enter an email address to get started: </Form.Label>
-            <Form.Control type="email" onChange={e => this.setState({ searchEmail: e.target.value })} value={this.state.searchEmail} />
-            <Form.Text className="text-muted"></Form.Text>
-            <Button
-              className="btnFormSend"
-              variant="outline-success"
-              onClick={this.onSubmit}
-            >Submit</Button>
-          </Form.Group>
-          <Form.Group className="m-0">
-            <Form.Label>Output: </Form.Label>
-            <Form.Control
-              className="textFeedback"
-              as="textarea"
-              rows="10"
-              value={this.state.textAreaOutput}
-              onChange={e => this.setState({ val: e.target.value })}
-              type="text"
-            />
-            
-            <Button
-              className="btnFormSend"
-              variant="outline-success"
-              onClick={this.onStart}
-            >Start</Button>
-            <Button
-              className="btnFormSend"
-              variant="outline-success"
-              onClick={this.onClear}
-            >Stop</Button>
-          </Form.Group>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+            <div class="mt-4">
+              <h4>Welcome to my optizmo coding test</h4>
+            </div>
+            <div class="mt-4">
+              <Form.Group controlId="formOutputFrequency">
+                <Form.Label>Please enter in seconds how often you would like to receive output alerts </Form.Label>
+                <Form.Control type="number" onChange={e => this.setState({ searchFrequency: e.target.value })} value={this.state.searchFrequency} />
+              </Form.Group>
+              </div>
+              <div class="mt-4">
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Please enter an email address to get started: </Form.Label>
+                <Form.Control type="email" onChange={e => this.setState({ searchEmail: e.target.value })} value={this.state.searchEmail} />
+                <Form.Text className="text-muted"></Form.Text>
+                <Button
+                  className="btnFormSend"
+                  variant="outline-success"
+                  onClick={this.onSubmit}
+                >Submit</Button>
+              </Form.Group>
+              </div>
+              
+              <Form.Group className="m-0">
+                <Form.Label>Output: </Form.Label>
+                <Form.Control
+                  className="textFeedback"
+                  as="textarea"
+                  rows="10"
+                  value={this.state.textAreaOutput}
+                  onChange={e => this.setState({ val: e.target.value })}
+                  type="text"
+                />
+                <Form.Label></Form.Label>
+                <Button
+                  className="btnFormSend"
+                  variant="outline-success"
+                  onClick={this.onStart}
+                >Start</Button>
+                <Button
+                  className="btnFormSend"
+                  variant="outline-success"
+                  onClick={this.onClear}
+                >Stop</Button>
+              </Form.Group>
+            </div>
+          </div>
         </div>
         {/* <div
           style={{
