@@ -6,19 +6,25 @@ import { Form, Button } from "react-bootstrap";
 export default class App extends Component {
 
   // const [list, setList] = useState([]);
+  // "adamk@gmail.com,test@hotmail.com,anthony@hotmails.com,rsteiner@live.com,chaffar@aol.com"
 
   state = {
-    searchEmails: "adamk@gmail.com,test@hotmail.com,anthony@hotmails.com,rsteiner@live.com,chaffar@aol.com",
+    searchEmail: "",
+    searchEmails: [],
     searchResults: ""
   };
 
   onSubmit = () => {
-    console.log(this.state.searchEmails);
+    const searchEmails = this.state.searchEmails;
+    searchEmails.push(this.state.searchEmail);
+    console.log ('searchEmails: ' + searchEmails);
 
-    findUsers(this.state.searchEmails)
+    this.setState({ searchEmails:  searchEmails});
+
+    findUsers(this.state.searchEmails.join(','))
       .then(items => {
         // this.state.searchResults = items;
-        this.setState({ searchResults: items });
+        this.setState({ searchResults: this.parseSearchResults(items) });
       })
   };
 
@@ -26,17 +32,27 @@ export default class App extends Component {
     this.setState({ searchResults: "" });
   };
 
+  parseSearchResults(searchResults) {
+    const results = [];
+    if (searchResults && searchResults.length > 0) {
+      for (const searchResult of searchResults) {
+        results.push(searchResult.email + ':' + searchResult.hasMatch);
+      }
+    }
+    return results.join(',');
+  }
+
   render() {
     return (
       <>
         <div>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Enter emails: </Form.Label>
-            <Form.Control type="email" placeholder="enter search emails" onChange={e => this.setState({ searchEmails: e.target.value })} value={this.state.searchEmails} />
+            <Form.Label>Please enter an email address to get started: </Form.Label>
+            <Form.Control type="email" placeholder="enter search emails" onChange={e => this.setState({ searchEmail: e.target.value })} value={this.state.searchEmail} />
             <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
           </Form.Group>
           <Form.Group className="m-0">
-            <Form.Label>Results: </Form.Label>
+            <Form.Label>Search History: </Form.Label>
             <Form.Control
               className="textFeedback"
               as="textarea"
