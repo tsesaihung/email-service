@@ -10,6 +10,7 @@ export default class App extends Component {
   // "adamk@gmail.com,test@hotmail.com,anthony@hotmails.com,rsteiner@live.com,chaffar@aol.com"
 
   state = {
+    enterEmailMessage: ">> Please enter the next email address",
     searchEmail: "",
     searchEmails: [],
     searchResults: "",
@@ -24,17 +25,14 @@ export default class App extends Component {
     // while (true) {
     //   console.log('enter new email');
     // }
-  }
+
+  };
 
   onStart = () => {
-
-    console.log('on start');
-
-    setTimeout(() => {
-      // this.appendText('enter email');
-      console.log('enter email');
-    }, 3000);
-  }
+    this.appendText('>> started');
+    this.appendText(this.state.enterEmailMessage);
+    this.interval = setInterval(() => this.appendText(this.state.enterEmailMessage), this.state.searchFrequency * 1000);
+  };
 
 
   onSubmit = () => {
@@ -47,16 +45,24 @@ export default class App extends Component {
     findUsers(this.state.searchEmails.join(','))
       .then(items => {
         // this.state.searchResults = items;
-        this.appendText('>>' + this.parseSearchResults(items));
+        this.appendText('>> ' + this.parseSearchResults(items));
       })
   };
+
+  moveCaretAtEnd(e) {
+    var temp_value = e.target.value
+    e.target.value = ''
+    e.target.value = temp_value
+  }
 
   appendText(input) {
     this.setState({ textAreaOutput: `${this.state.textAreaOutput}\n${input}` });
   }
 
   onClear = () => {
-    this.setState({ textAreaOutput: "" });
+    // this.setState({ textAreaOutput: "" });
+    this.appendText('>> stopped');
+    clearInterval(this.interval);
   };
 
   parseSearchResults(searchResults) {
@@ -72,31 +78,31 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 offset-md-2">
-            <div class="mt-4">
-              <h4>Welcome to my optizmo coding test</h4>
-            </div>
-            <div class="mt-4">
-              <Form.Group controlId="formOutputFrequency">
-                <Form.Label>Please enter in seconds how often you would like to receive output alerts </Form.Label>
-                <Form.Control type="number" onChange={e => this.setState({ searchFrequency: e.target.value })} value={this.state.searchFrequency} />
-              </Form.Group>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 offset-md-2">
+              <div className="mt-4">
+                <h4>Welcome to my optizmo coding test</h4>
               </div>
-              <div class="mt-4">
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Please enter an email address to get started: </Form.Label>
-                <Form.Control type="email" onChange={e => this.setState({ searchEmail: e.target.value })} value={this.state.searchEmail} />
-                <Form.Text className="text-muted"></Form.Text>
-                <Button
-                  className="btnFormSend"
-                  variant="outline-success"
-                  onClick={this.onSubmit}
-                >Submit</Button>
-              </Form.Group>
+              <div className="mt-4">
+                <Form.Group controlId="formOutputFrequency">
+                  <Form.Label>Please enter in seconds how often you would like to receive output alerts </Form.Label>
+                  <Form.Control type="number" onChange={e => this.setState({ searchFrequency: e.target.value })} value={this.state.searchFrequency} />
+                </Form.Group>
               </div>
-              
+              <div className="mt-4">
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Please enter an email address to get started: </Form.Label>
+                  <Form.Control type="email" onChange={e => this.setState({ searchEmail: e.target.value })} value={this.state.searchEmail} />
+                  <Form.Text className="text-muted"></Form.Text>
+                  <Button
+                    className="btnFormSend"
+                    variant="outline-success"
+                    onClick={this.onSubmit}
+                  >Submit</Button>
+                </Form.Group>
+              </div>
+
               <Form.Group className="m-0">
                 <Form.Label>Output: </Form.Label>
                 <Form.Control
@@ -105,6 +111,8 @@ export default class App extends Component {
                   rows="10"
                   value={this.state.textAreaOutput}
                   onChange={e => this.setState({ val: e.target.value })}
+                  autoFocus
+                  onFocus={this.moveCaretAtEnd}
                   type="text"
                 />
                 <Form.Label></Form.Label>
