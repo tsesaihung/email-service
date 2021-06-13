@@ -134,14 +134,10 @@ export default class App extends Component {
                   rows="10"
                   value={this.state.textAreaOutput}
                   onChange={e => this.setState({ val: e.target.value })}
-                  // autoFocus
-                  // onFocus={this.moveCaretAtEnd}
                   type="text"
                 />
                 <Form.Label></Form.Label>
               </Form.Group>
-              {/* <textarea rows="10" cols="15" name="a" id="talkContent"
-                 value={this.state.textAreaOutput}></textarea> */}
             </div>
           </div>
         </div>
