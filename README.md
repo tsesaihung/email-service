@@ -33,6 +33,7 @@
     UI 
     https://github.com/react-bootstrap/code-sandbox-examples/blob/master/README.md
     https://blog.logrocket.com/how-to-use-bootstrap-with-react-a354715d1121/
+    https://www.skptricks.com/2018/06/append-or-prepend-html-using-reactjs.html
 
     CORS
     https://www.pluralsight.com/guides/allow-access-control-origin-in-create-react-app
