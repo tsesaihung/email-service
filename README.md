@@ -3,7 +3,17 @@
     gpg --list-keys
     git config --global user.signingkey 15A7F79AA2A04A1311870F23BB33825AC9F8B069
 
-    node server.js
+    How to run the application:
+
+    Start the backend service:
+
+        cd backend
+        node server.js
+
+    Start the ui:
+
+        cd ui
+        npm start
 
     yarn add express
     yarn add body-parser
@@ -34,6 +44,7 @@
     https://github.com/react-bootstrap/code-sandbox-examples/blob/master/README.md
     https://blog.logrocket.com/how-to-use-bootstrap-with-react-a354715d1121/
     https://www.skptricks.com/2018/06/append-or-prepend-html-using-reactjs.html
+    https://vaadin.com/forum/thread/2516081/automatic-scroll-down-to-bottom-of-textarea-or-other-component
 
     CORS
     https://www.pluralsight.com/guides/allow-access-control-origin-in-create-react-app

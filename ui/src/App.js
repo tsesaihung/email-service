@@ -25,11 +25,11 @@ export default class App extends Component {
     // if process is already started
     if (this.state.processStatus === 'Start') {
       this.setState({ processStatus: 'Stop' });
-      this.appendText('>> started');
+      this.appendText('>> stopped');
       clearInterval(this.interval);
     } else {
       this.setState({ processStatus: 'Start' });
-      this.appendText('>> stopped');
+      this.appendText('>> started');
       this.interval = setInterval(() => this.parseSearchResults(this.state.searchResults), this.state.searchFrequency * 1000);
     }
   };
@@ -57,15 +57,14 @@ export default class App extends Component {
       })
   };
 
-  moveCaretAtEnd(e) {
-    var temp_value = e.target.value
-    e.target.value = ''
-    e.target.value = temp_value
+  refreshOutput() {
+    var textarea = document.getElementById('outputResult');
+    textarea.scrollTop = textarea.scrollHeight;
   }
 
   appendText(input) {
-    console.log('input: ' + input);
     this.setState({ textAreaOutput: `${this.state.textAreaOutput}\n${input}` });
+    this.refreshOutput();
   }
 
   parseSearchResult(email, searchResults) {
@@ -129,6 +128,7 @@ export default class App extends Component {
                 <Form.Label>Output: </Form.Label>
                 <Form.Control
                   readOnly
+                  id="outputResult"
                   className="textFeedback"
                   as="textarea"
                   rows="10"
@@ -140,6 +140,8 @@ export default class App extends Component {
                 />
                 <Form.Label></Form.Label>
               </Form.Group>
+              {/* <textarea rows="10" cols="15" name="a" id="talkContent"
+                 value={this.state.textAreaOutput}></textarea> */}
             </div>
           </div>
         </div>
