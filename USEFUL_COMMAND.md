@@ -1,5 +1,8 @@
 # email-service
 
+    yarn global add serve
+    serve -s build
+
     # add to package.json
     "proxy": "http://search-email-backend:8081"
     
