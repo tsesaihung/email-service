@@ -5,6 +5,12 @@
 
     How to run the application:
 
+    Build using docker
+
+        cd ui
+        docker build -t search-email-ui .
+        docker run -it -p 3000:3000 search-email-ui
+
     Start the backend service:
 
         cd backend
@@ -18,6 +24,9 @@
     yarn add express
     yarn add body-parser
     yarn add react
+
+    # add to package.json
+    "proxy": "http://search-email-backend:8081"
     
     http://localhost:8081/listUsers
     curl -d '{"emails":"adamk@gmail.com,test@hotmail.com,anthony@hotmails.com,rsteiner@live.com,chaffar@aol.com"}' -H "Content-Type: application/json" -X POST http://localhost:8081/findUsers

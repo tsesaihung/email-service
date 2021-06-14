@@ -5,7 +5,7 @@ const fs = require('fs');
 module.exports = {
 
     getAllUsers: function () {
-        const rawdata = fs.readFileSync('../data/users.json');
+        const rawdata = fs.readFileSync('./users.json');
         const users = JSON.parse(rawdata);
         return users;
     },

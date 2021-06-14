@@ -1,0 +1,20 @@
+version: "3.6"
+
+services:
+  search-email-ui:
+    build: ./ui
+    image: search-email-ui
+    ports:
+      - 3000:3000
+    # links:
+    #   - kanban-app
+    depends_on:
+      - search-email-backend
+
+  search-email-backend:
+    build: ./backend
+    image: search-email-backend
+    ports:
+      - 8081:8081
+
+    
