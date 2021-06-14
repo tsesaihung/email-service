@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { useEffect, useState, Component } from 'react';
+import React, { Component } from 'react';
 import { findUsers } from './service/email-service';
 import { Form, Button } from "react-bootstrap";
 export default class App extends Component {
@@ -98,7 +98,7 @@ export default class App extends Component {
               </div>
               <div className="mt-4">
                 <Form.Group controlId="formOutputFrequency">
-                  <Form.Label>Please enter in seconds how often you would like to receive output alerts </Form.Label>
+                  <Form.Label>Please enter in seconds how often you would like to receive output alerts: </Form.Label>
                   <Form.Control disabled={this.hasStarted()} type="number" onChange={e => this.setState({ searchFrequency: e.target.value })} value={this.state.searchFrequency} />
                 </Form.Group>
               </div>
