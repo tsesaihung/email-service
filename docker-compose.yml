@@ -3,7 +3,7 @@ version: "3.6"
 services:
   search-email-ui:
     build: ./ui
-    image: tsesaihung/search-email-ui
+    image: search-email-ui
     ports:
       - 5000:80
     # links:
@@ -13,7 +13,7 @@ services:
 
   search-email-backend:
     build: ./backend
-    image: tsesaihung/search-email-backend
+    image: search-email-backend
     ports:
       - 8081:8081
 
