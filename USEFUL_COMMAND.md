@@ -39,4 +39,6 @@
     https://www.pluralsight.com/guides/allow-access-control-origin-in-create-react-app
     https://javascript.info/fetch-crossorigin
 
-    
+    Testing
+    https://reactjs.org/docs/testing-recipes.html#mocking-modules
+    https://github.com/testing-library/jest-dom 

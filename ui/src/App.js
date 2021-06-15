@@ -17,9 +17,9 @@ export default class App extends Component {
     processStatus: 'Stop'
   };
 
-  constructor() {
-    super();
-  };
+  // constructor() {
+  //   super();
+  // };
 
   onClick = () => {
     // if process is already started
@@ -104,6 +104,7 @@ export default class App extends Component {
               </div>
               <div className="mt-1">
                 <Button
+                  name="processButton"
                   className="btnFormSend"
                   variant="outline-success"
                   onClick={this.onClick}
@@ -118,6 +119,7 @@ export default class App extends Component {
               </div>
               <div className="mt-1 mb-4">
                 <Button
+                  name="searchEmailButton"
                   disabled={!this.hasStarted()}
                   className="btnFormSend"
                   variant="outline-success"
