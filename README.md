@@ -8,3 +8,7 @@
 
         chmod 755 build-and-run.sh
         ./build-and-run.sh
+
+    3) Access the the application using the url
+
+        http://localhost:5000/
