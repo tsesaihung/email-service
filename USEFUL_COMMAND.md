@@ -1,5 +1,7 @@
 # email-service
 
+    # backend
+    npm install mocha -g
     yarn global add serve
     serve -s build
 
