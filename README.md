@@ -1,4 +1,4 @@
-# search email application
+# Search Email Application
 
     How to run the application:
 
