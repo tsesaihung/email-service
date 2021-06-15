@@ -3,7 +3,7 @@ const assert = require('assert');
 const expect    = require("chai").expect;
 const userService = require("../user-service");
 
-describe('Simple Math Test', () => {
+describe('Test user service', () => {
     it('should matched for first email', () => {
         const firstEmail = 'adamk@hotmail.com';
         const secondEmail = 'test@gmail.com';
