@@ -1,6 +1,6 @@
-# email-service
+# search email application
 
-    - How to run the application:
+    How to run the application:
 
     1) Make sure you have docker running in your local machine and docker compose installed in your machine
 
